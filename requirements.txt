@@ -1,2 +1,9 @@
 streamlit
-openai
+google-generativeai
+pinecone-client
+langchain
+langchain_community
+langchain_google_genai
+langchain-pinecone
+langgraph
+pypdf
