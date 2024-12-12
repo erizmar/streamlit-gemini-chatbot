@@ -1,10 +1,7 @@
 from main import ChatBot
 import streamlit as st
-import random
-import string
 
 bot = ChatBot()
-thread_id = ""
 
 st.set_page_config(page_title="Stateful RAG Chat Bot")
 with st.sidebar:
@@ -38,9 +35,7 @@ if input := st.chat_input():
 if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Getting your answer from mystery stuff.."):
-            # if thread_id == "":
-            #     thread_id = "".join(random.choices(string.ascii_uppercase + string.digits, k=7))
-            response = generate_response(input, "TFD")
+            response = generate_response(input, "Ciso")
             st.write(response)
     message = {"role": "assistant", "content": response}
     st.session_state.messages.append(message)

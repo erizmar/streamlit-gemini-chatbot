@@ -15,17 +15,19 @@ import streamlit as st
 
 os.environ['GOOGLE_API_KEY'] = st.secrets['GOOGLE_API_KEY']
 os.environ['INDEX_NAME'] = 'ragtest'
+os.environ['NAMESPACE'] = 'cisometric'
 os.environ['PINECONE_API_KEY'] = st.secrets['PINECONE_API_KEY']
 os.environ['LANGCHAIN_TRACING_V2'] = 'true'
 os.environ['LANGCHAIN_ENDPOINT'] = 'https://api.smith.langchain.com'
 os.environ['LANGCHAIN_API_KEY'] = st.secrets['LANGCHAIN_API_KEY']
 
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
-embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+gemini_version = 'gemini-1.5-flash'
+google_embedding_version = 'models/text-embedding-004'
+llm = ChatGoogleGenerativeAI(model=gemini_version)
+embeddings = GoogleGenerativeAIEmbeddings(model=google_embedding_version)
 
-vectorstore = PineconeVectorStore(index_name=os.environ["INDEX_NAME"], embedding=GoogleGenerativeAIEmbeddings(model="models/embedding-001"))
+vectorstore = PineconeVectorStore(index_name=os.environ["INDEX_NAME"], namespace=os.environ["NAMESPACE"], embedding=GoogleGenerativeAIEmbeddings(model=google_embedding_version))
 retriever = vectorstore.as_retriever()
-
 
 ### Contextualize question ###
 contextualize_q_system_prompt = (
