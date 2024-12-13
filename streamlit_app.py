@@ -28,7 +28,7 @@ if "thread_id" not in st.session_state.keys():
 trigger = st.button("New Chat")
 
 if trigger:
-    st.session_state.thread_id = "CISO_".join(random.choices(string.ascii_uppercase + string.digits, k=7))
+    st.session_state.thread_id = "".join(random.choices(string.ascii_uppercase + string.digits, k=7))
     st.session_state.messages = [{"role": "assistant", "content": "Welcome, I'm your assistant, ask me anything"}]
 
 if st.session_state.thread_id != "":
